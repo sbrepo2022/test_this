@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block add_style %}
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+{% endblock %}
+
+{% block add_scripts %}
+    <script src="{% static 'js/app.js' %}"></script>
+{% endblock %}
+
+{% block templates %}
+    <div data-template-name="field-error" class="form-error">
+        <div class="red-line"></div>
+        <ul data-property-name="errors-ul">
+
+        </ul>
+    </div>
+
+    <img data-template-name="tester-img-placeholder" src="{% static 'resources/icons/face.svg' %}">
+
+    <div data-template-name="card-layout" class="cards-layout"></div>
+
+    <div data-template-name="card-layout-placeholder" class="cards-layout-placeholder">
+        <div data-property-name="placeholder">
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="workspace">
+        <button data-action="show-sidebar" class="menu-button">
+            <svg viewBox="0 0 24 24">
+                <use class="class-use" href="{% static 'resources/icons/menu.svg' %}#menu"></use>
+            </svg>
+        </button>
+        <div id="sidebarOverlay" data-action="show-sidebar" class="sidebar-overlay hidden d-none"></div>
+        <aside id="sidebar" class="sidebar hidden d-none">
+            <div class="sidebar-logo">
+                <img src="{% static 'resources/logo/logo.svg' %}" alt="">
+            </div>
+            <div class="sidebar-content">
+                <ul>
+                    <li>
+                        <a href="{% url 'tasks' %}" class="sidebar-link {% if page_name == 'tasks' %}active{% endif %}">
+                            <svg viewBox="0 0 24 24">
+                                <use class="class-use" href="{% static 'resources/icons/article.svg' %}#article"></use>
+                            </svg>
+                            <span>Задачи</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'testers' %}" class="sidebar-link {% if page_name == 'testers' %}active{% endif %}">
+                            <svg viewBox="0 0 24 24">
+                                <use class="class-use" href="{% static 'resources/icons/supervisor_account.svg' %}#supervisorAccount"></use>
+                            </svg>
+                            <span>Тестировщики</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="sidebar-bottom-list">
+                    <li>
+                        <a href="{% url 'logout' %}" class="sidebar-link danger">
+                            <svg viewBox="0 0 24 24">
+                                <use class="class-use" href="{% static 'resources/icons/power_settings.svg' %}#powerSettings"></use>
+                            </svg>
+                            <span>Выход</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <div class="main-block">
+            <header class="toolbar">
+                <div id="toolbarContent">
+                    {% block toolbar_content %}
+                    {% endblock %}
+                </div>
+                <img class="ask-arrow" src="{% static 'resources/icons/ask_arrow.svg' %}">
+                <div class="avatar-icon">
+                    <button data-action="open-credits-dialog" data-dialog-id="creditsDialog" style="background-image: url('{% static 'resources/images/sergey_borisov.jpg' %}')"></button>
+                </div>
+            </header>
+            <section id="contentSection" class="content-section">
+                {% block app_content %}
+                {% endblock %}
+
+                <div id="creditsDialog" data-action="dialog-close" data-dialog-id="creditsDialog" class="dialog-overlay d-none hidden">
+                    <div class="dialog-section" data-action="dialog-close" data-dialog-id="creditsDialog">
+                        <div class="content-surface content-surface-padding">
+                            <div class="dialog-titlebar mb-48">
+                                <div class="dialog-title">О сайте</div>
+                                <button data-action="dialog-close" data-dialog-id="creditsDialog" class="dialog-close">
+                                    <img  data-action="dialog-close" data-dialog-id="creditsDialog" src="{% static '/resources/icons/close.svg' %}">
+                                </button>
+                            </div>
+                            <section class="article-content">
+                                <h2 class="text-center">Сайт разработал:</h2>
+                                <div class="article-paragraph text-center">
+                                    <div class="article-avatar mb-24">
+                                        <div style="background-image: url('{% static 'resources/images/sergey_borisov.jpg' %}')"></div>
+                                    </div>
+                                    <div class="mb-24">
+                                        Борисов Сергей<br>
+                                        Студент МГТУ РК6-71б
+                                    </div>
+                                    <a href="https://t.me/borisovsd" target="_blank" class="social-link">
+                                        <img src="{% static 'resources/icons/telegram.png' %}">
+                                        @borisovsd
+                                    </a>
+                                </div>
+                                <h2 class="text-center">Репозиторий проекта на Github:</h2>
+                                <div class="article-paragraph text-center">
+                                    <a href="https://github.com/sbrepo2022/test_this" target="_blank" class="social-link">
+                                        <img src="{% static 'resources/icons/github.svg' %}">
+                                        sbrepo2022/test_this
+                                    </a>
+                                </div>
+                                <h2 class="text-center">Макет сайта в Figma:</h2>
+                                <div class="article-paragraph text-center">
+                                    <iframe loading="lazy" style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FNQGVRg6uSWDRCldq0QRqWd%2Fborisov_rk6_71_homework_layout%3Ft%3DWSIeI9sxBDdW5Lnv-1" allowfullscreen></iframe>
+                                </div>
+                                <h2 class="text-center">Технологии:</h2>
+                                <div class="article-paragraph">
+                                    <ul class="article-ul">
+                                        <li>Сайт сделан на базе django + django rest framework.</li>
+                                        <li>Фронтенд разработан на JS без использования сторонних библиотек. Качество работы фронтенда обеспечивается выбраным подходом к проектированию.</li>
+                                        <li>Верстка адаптирована для использования на десктопных и мобильных устройствах.</li>
+                                    </ul>
+                                </div>
+                                <div class="text-center">
+                                    <button class="form-button" data-action="dialog-close" data-dialog-id="creditsDialog">
+                                        Понятно!
+                                    </button>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+        <title>Test.this | {{ page_title }}</title>
+
+        {% include 'components/font_links.html' %}
+
+        <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+        <link rel="stylesheet" href="{% static 'css/utils.css' %}">
+        <link rel="stylesheet" href="{% static 'css/common.css' %}">
+        {% block add_style %}
+        {% endblock %}
+    </head>
+    <body>
+        <div style="display: none">
+            {% block templates %}
+            {% endblock %}
+        </div>
+
+        {% block content %}
+        {% endblock %}
+
+        <script src="{% static 'js/common.js' %}"></script>
+        {% block add_scripts %}
+        {% endblock %}
+    </body>
+</html>

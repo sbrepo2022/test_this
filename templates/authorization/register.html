@@ -1,0 +1,60 @@
+{% extends 'authorization/authorization_base.html' %}
+{% load static %}
+
+{% block current_form %}
+    <div class="content-surface-padding text-center">
+        <div class="surface-title mb-16">Регистрация</div>
+        <div class="mb-36">
+            <a href="{% url 'login' %}">Есть аккаунт? Войти</a>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% if form.non_field_errors %}
+                <div class="form-error">
+                    <div class="red-line"></div>
+                    <ul>
+                        {% for error in form.non_field_errors %}
+                            <li>{{ error|escape }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <div class="pb-36"></div>
+
+            {% for field in form.visible_fields %}
+                <div class="custom-input mb-36">
+                    {{ field }}
+                </div>
+                {% if field.errors %}
+                    <div class="form-error">
+                        <div class="red-line"></div>
+                        <ul>
+                            {% for error in field.errors %}
+                                <li>{{ error|escape }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                {% if field.help_text %}
+                    <div class="field-helper mt-36">
+                        <div class="primary-line"></div>
+                        <div class="field-helper-text">
+                            {{ field.help_text }}
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="pb-36"></div>
+            {% endfor %}
+
+            <button class="form-button">
+                Создать аккаунт
+            </button>
+        </form>
+    </div>
+{% endblock %}

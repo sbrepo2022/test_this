@@ -1,0 +1,149 @@
+.card-task {
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.card-task.target {
+    animation: 1.5s ease-in-out card-task-target;
+}
+
+@keyframes card-task-target {
+    0% {
+        background-color: #ffffff;
+    }
+
+    25% {
+        background-color: #DCD6FA;
+    }
+
+    50% {
+        background-color: #ffffff;
+    }
+
+    75% {
+        background-color: #DCD6FA;
+    }
+
+    100% {
+        background-color: #ffffff;
+    }
+}
+
+.card-title {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.card-basic-text {
+    font-size: var(--default-font-size);
+}
+
+.card-secondary-text {
+    display: flex;
+}
+
+.card-secondary-text > span {
+    font-size: 0.66666rem;
+    color: #777;
+}
+
+.card-secondary-text > img {
+    width: 1rem;
+    margin-right: 0.5rem;
+}
+
+.card-section-text {
+    font-weight: 500;
+    font-size: var(--default-font-size);
+}
+
+.card-testers-block {
+    display: flex;
+}
+
+.card-tester-circle {
+    position: relative;
+    display: flex;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 2.5rem;
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.card-tester-circle > div {
+    width: 100%;
+    height: 100%;
+    border-radius: 2.5rem;
+}
+
+.card-tester-circle img {
+    width: 100%;
+    height: 100%;
+    border-radius: 2.5rem;
+    object-fit: cover;
+}
+
+.choose-testers-placeholder {
+    color: var(--primary-color);
+    opacity: 0.2;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.card-tester-circle.add-tester {
+    background-color: #F6F5FE;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.card-tester-circle.add-tester:hover {
+    background-color: #EDEAFC;
+}
+
+.card-tester-circle.add-tester > img {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: auto;
+}
+
+.card-tester-circle:hover > .card-tester-delete {
+    opacity: 1.0;
+}
+
+.card-tester-delete {
+    position: absolute;
+    opacity: 0.0;
+    top: -0.5rem;
+    right: -0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 1.5rem;
+    background-color: #fff;
+
+    transition: opacity 0.2s ease, background-color 0.2s ease;
+}
+
+.card-tester-delete:hover {
+    background-color: #EDEAFC;
+}
+
+.card-tester-delete > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    margin-top: auto;
+}

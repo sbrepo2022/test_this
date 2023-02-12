@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block add_style %}
+    <link rel="stylesheet" href="{% static 'css/authorization.css' %}">
+{% endblock %}
+
+{% block add_scripts %}
+    <script src="{% static 'js/authorization.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="layer-1 anim-cir-2 hide" data-onload-anim="true"></div>
+    <div class="layer-1 anim-cir-1 hide" data-onload-anim="true"></div>
+    <section class="d-flex">
+        <div class="layer-2 content-section">
+            <div class="logo-box hide" data-onload-anim="true">
+                <img src="{% static 'resources/logo/logo.svg' %}" alt="Test.this">
+            </div>
+            <div class="content-surface anim-surface hide" data-onload-anim="true">
+                {% block current_form %}
+                {% endblock %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

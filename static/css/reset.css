@@ -1,0 +1,92 @@
+:root {
+    --primary-color: #5030E5;
+    --primary-color-darken: #4020D5;
+    --bg-color: #FCFBFF;
+    --danger-color: #DC3545;
+    --default-font-size: 0.83333rem;
+}
+
+@media (max-width: 575.98px) {
+    :root {
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 576px) {
+    :root {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 768px) {
+    :root {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 992px) {
+    :root {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 1200px) {
+    :root {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 1400px) {
+    :root {
+        font-size: 20px;
+    }
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #000;
+    background-color: #fff;
+}
+
+button {
+    border: none;
+    background: none;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+input {
+    border: none;
+}
+
+input, button:active, button:focus {
+    outline: none;
+}
+
+button::-moz-focus-inner {
+    border: 0;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    color: #000;
+}
+
+ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: none;
+}

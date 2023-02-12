@@ -1,0 +1,91 @@
+{% extends 'app/app_layout.html' %}
+{% load static %}
+
+{% block add_style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/testers.css' %}">
+{% endblock %}
+
+{% block add_scripts %}
+    {{ block.super }}
+    <script src="{% static 'js/testers.js' %}"></script>
+{% endblock %}
+
+{% block toolbar_content %}
+    <button data-action="open-add-tester-dialog" data-dialog-id="createTesterDialog" class="secondary-button">
+        <img src="{% static 'resources/icons/add.svg' %}">
+        <span>Добавить тестировщика</span>
+    </button>
+{% endblock %}
+
+{% block templates %}
+    {{ block.super }}
+
+    <div data-template-name="tester-card" class="content-surface card-padding card-tester card-anim hide">
+        <div class="card-tester-bg" style="background-image: url('{% static 'resources/images/tester_card_bg.svg' %}');"></div>
+        <div class="card-tester-content">
+            <div class="card-title mb-24" data-property-name="tester-name">Борисов Сергей</div>
+            <div class="card-basic-text mb-24" data-property-name="tester-description">Тестировщик 1-го разряда</div>
+            <div class="card-tester-circle mb-36" data-property-name="tester-photo">
+                <img src="{% static 'resources/icons/face.svg' %}">
+            </div>
+            <div class="card-section-text mb-12">
+                Ближайшая задача:
+            </div>
+            <a href="{% url 'tasks' %}" class="card-task-link mb-36" data-property-name="tester-nearest-task">&lt;Нет назначенных задач&gt;</a>
+            <div class="card-actions">
+                <button data-action="open-edit-tester-dialog" data-dialog-id="createTesterDialog" class="secondary-button">
+                    <img src="{% static 'resources/icons/edit.svg' %}">
+                    <span>Изменить</span>
+                </button>
+                <button data-action="remove-tester" class="secondary-button danger">
+                    <img src="{% static 'resources/icons/delete.svg' %}">
+                    <span>Удалить</span>
+                </button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block app_content %}
+    <div id="createTesterDialog" data-action="dialog-close" data-dialog-id="createTesterDialog" class="dialog-overlay d-none hidden">
+        <div class="dialog-section" data-action="dialog-close" data-dialog-id="createTesterDialog">
+            <div class="content-surface content-surface-padding">
+                <div class="dialog-titlebar mb-48">
+                    <div class="dialog-title">Создание тестировщика</div>
+                    <button data-action="dialog-close" data-dialog-id="createTesterDialog" class="dialog-close">
+                        <img  data-action="dialog-close" data-dialog-id="createTesterDialog" src="{% static '/resources/icons/close.svg' %}">
+                    </button>
+                </div>
+                <form class="text-center" data-action="add-tester" data-dialog-id="createTesterDialog">
+                    <div class="text-center">
+                        <div id="formAvatarIcon" class="form-avatar-icon mb-36">
+                            <img data-template-name="tester-img-placeholder" src="{% static 'resources/icons/face.svg' %}">
+                        </div>
+                    </div>
+                    <div class="avatar-input mb-24">
+                        <img src="{% static 'resources/icons/add_photo.svg' %}">
+                        <span>Выбрать фото</span>
+                        <input data-action="choose-photo" data-photo-view-id="formAvatarIcon" type="file" name="photo" accept="image/*">
+                    </div>
+                    <div data-error-name="photo" class="mb-36"></div>
+                    <div class="custom-input mb-36">
+                        <input type="text" name="firstname" placeholder="Имя">
+                    </div>
+                    <div data-error-name="firstname" class="mb-36"></div>
+                    <div class="custom-input mb-36">
+                        <input type="text" name="lastname" placeholder="Фамилия">
+                    </div>
+                    <div data-error-name="lastname" class="mb-36"></div>
+                    <div class="custom-input mb-36">
+                        <input type="text" name="description" placeholder="Описание">
+                    </div>
+                    <div data-error-name="description" class="mb-36"></div>
+                    <button class="form-button" type="submit">
+                        Создать тестировщика
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends 'app/app_layout.html' %}
+{% load static %}
+
+{% block add_style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/tasks.css' %}">
+{% endblock %}
+
+{% block add_scripts %}
+    {{ block.super }}
+    <script src="{% static 'js/tasks.js' %}"></script>
+{% endblock %}
+
+{% block toolbar_content %}
+    <button data-action="open-add-task-dialog" data-dialog-id="createTaskDialog" class="secondary-button">
+        <img src="{% static 'resources/icons/add.svg' %}">
+        <span>Добавить задачу</span>
+    </button>
+{% endblock %}
+
+{% block templates %}
+    {{ block.super }}
+
+    <ul data-template-name="choose-tester-list" class="choose-tester-list">
+
+    </ul>
+
+    <li data-template-name="choose-tester-list-elem" class="choose-tester-list-elem">
+        <label>
+            <div data-property-name="tester-photo">
+                <img src="{% static '/resources/images/sergey_borisov.jpg' %}">
+            </div>
+            <div data-property-name="tester-name">Борисов Сергей</div>
+            <input type="radio" name="tester" data-property-name="tester-id-input">
+            <span><span></span></span>
+        </label>
+    </li>
+
+    <div data-template-name="task-testers-list" class="card-testers-block mb-36">
+
+        <button  data-action="open-add-tester-to-task-dialog" data-dialog-id="addTesterToTaskDialog" class="card-tester-circle add-tester">
+            <img src="{% static 'resources/icons/add.svg' %}">
+        </button>
+    </div>
+
+    <div data-template-name="task-tester-circle" class="card-tester-circle">
+        <div data-property-name="tester-photo">
+            <img src="{% static 'resources/icons/face.svg' %}">
+        </div>
+        <button data-action="remove-tester-from-task" class="card-tester-delete">
+            <img src="{% static 'resources/icons/remove_circle.svg' %}">
+        </button>
+    </div>
+
+    <div data-template-name="choose-testers-placeholder" class="choose-testers-placeholder">Нет доступных тестировщиков</div>
+
+    <div data-template-name="task-card" class="content-surface card-padding card-task card-anim hide">
+        <div data-property-name="task-title" class="card-title mb-24">Тестирование сервера</div>
+        <div data-property-name="task-description-container">
+            <div data-property-name="task-description" class="card-basic-text mb-24">Тестирование сервера на отказоустойчивость. Необходимо проверить все основные параметры.</div>
+        </div>
+        <div data-property-name="task-address-container" class="card-secondary-text mb-24">
+            <img src="{% static 'resources/icons/location.svg' %}">
+            <span data-property-name="task-address">4-й Сыромятнический пер., 3/5с5 этаж 1, офис 5</span>
+        </div>
+        <div data-property-name="task-datetime-container" class="card-secondary-text mb-24">
+            <img src="{% static 'resources/icons/time.svg' %}">
+            <span data-property-name="task-datetime">21.01.2023 18:00</span>
+        </div>
+        <div class="card-section-text mb-16">Исполнители:</div>
+        <div data-property-name="task-testers-list-wrapper">
+
+        </div>
+        <div class="card-actions">
+            <button data-action="open-edit-task-dialog" data-dialog-id="createTaskDialog" class="secondary-button">
+                <img src="{% static 'resources/icons/edit.svg' %}">
+                <span>Изменить</span>
+            </button>
+            <button data-action="remove-task" class="secondary-button danger">
+                <img src="{% static 'resources/icons/delete.svg' %}">
+                <span>Удалить</span>
+            </button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block app_content %}
+    <div id="createTaskDialog" data-action="dialog-close" data-dialog-id="createTaskDialog" class="dialog-overlay d-none hidden">
+        <div class="dialog-section" data-action="dialog-close" data-dialog-id="createTaskDialog">
+            <div class="content-surface content-surface-padding">
+                <div class="dialog-titlebar mb-48">
+                    <div class="dialog-title">Создание задачи</div>
+                    <button data-action="dialog-close" data-dialog-id="createTaskDialog" class="dialog-close">
+                        <img  data-action="dialog-close" data-dialog-id="createTaskDialog" src="{% static '/resources/icons/close.svg' %}">
+                    </button>
+                </div>
+                <form class="text-center" data-action="add-task" data-dialog-id="createTaskDialog">
+                    <div class="custom-input mb-36">
+                        <input type="text" name="title" placeholder="Название задачи">
+                    </div>
+                    <div data-error-name="title" class="mb-36"></div>
+                    <div class="custom-input mb-36">
+                        <input type="text" name="description" placeholder="Описание задачи">
+                    </div>
+                    <div data-error-name="description" class="mb-36"></div>
+                    <div class="custom-input mb-36">
+                        <input type="text" name="address" placeholder="Адрес">
+                    </div>
+                    <div data-error-name="address" class="mb-36"></div>
+                    <div class="custom-input mb-48">
+                        <input type="datetime-local" name="date_time">
+                    </div>
+                    <div data-error-name="date_time" class="mb-36"></div>
+                    <button class="form-button" type="submit">
+                        Создать задачу
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="addTesterToTaskDialog" data-action="dialog-close" data-dialog-id="addTesterToTaskDialog" class="dialog-overlay d-none hidden">
+        <div class="dialog-section-thin" data-action="dialog-close" data-dialog-id="addTesterToTaskDialog">
+            <div class="content-surface content-surface-padding">
+                <div class="dialog-titlebar mb-48">
+                    <div class="dialog-title">Добавить исполнителя</div>
+                    <button data-action="dialog-close" data-dialog-id="addTesterToTaskDialog" class="dialog-close">
+                        <img  data-action="dialog-close" data-dialog-id="addTesterToTaskDialog" src="{% static '/resources/icons/close.svg' %}">
+                    </button>
+                </div>
+                <form class="text-center" data-action="add-tester-to-task" data-dialog-id="addTesterToTaskDialog">
+
+                    <div data-error-name="tester" class="mb-36"></div>
+                    <button class="form-button">
+                        Добавить исполнителя
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
