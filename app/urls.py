@@ -5,8 +5,8 @@ from .views import TasksView, TestersView, APITasksViewSet, APITestersViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register('tasks', APITasksViewSet)
-router.register('testers', APITestersViewSet)
+router.register('tasks', APITasksViewSet, 'Task')
+router.register('testers', APITestersViewSet, 'Tester')
 
 
 urlpatterns = [

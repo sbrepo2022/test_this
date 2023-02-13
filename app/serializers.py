@@ -3,12 +3,20 @@ from .models import Task, Tester
 
 
 class TaskSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
+
     class Meta:
         model = Task
-        fields = ('id', 'title', 'description', 'address', 'date_time', 'testers')
+        fields = ('id', 'user', 'title', 'description', 'address', 'date_time', 'testers')
 
 
 class TesterSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
+
     class Meta:
         model = Tester
-        fields = ('id', 'firstname', 'lastname', 'description', 'photo', 'task_set')
+        fields = ('id', 'user', 'firstname', 'lastname', 'description', 'photo', 'task_set')
